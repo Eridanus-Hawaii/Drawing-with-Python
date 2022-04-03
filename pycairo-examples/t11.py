@@ -35,9 +35,11 @@ if __name__ =='__main__':
     context.arc(x+r, y+r, r, math.pi, 1.5*math.pi)
     context.close_path()
 
+
     context.set_source_rgb(0xff/float(0xff), 0xff/float(0xff), 0x00/float(0xff))
     context.fill_preserve()
     context.set_source_rgb(0x00/float(0xff), 0x00/float(0xff), 0xff/float(0xff))
+
     context.stroke()
 
     x = 75
@@ -73,5 +75,6 @@ if __name__ =='__main__':
     context.show_text(str)
     context.stroke()
 
-    surface.write_to_png(image_file)
+    #surface.write_to_png(image_file)
+    surface.write_to_png('3.png')
 

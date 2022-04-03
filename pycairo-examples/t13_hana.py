@@ -18,9 +18,12 @@ def set_source_color(context, name):
                 context.set_source_rgb(new_color[0], new_color[1], new_color[2])
                 break
 
-
 #----------------------------------------------------------------
-if __name__ == '__main__':
+def draw_label(ctx, x, y, num, str):
+    print(x, y, 'に移動して')
+    print(num, 'を描画')
+    print(str, 'を描画')
+
     image_file = 'image_' + sys.argv[0].replace('.py', '.png')
     width = 400
     height = 200
@@ -51,12 +54,12 @@ if __name__ == '__main__':
     context.close_path()
 
     #context.set_source_rgb(0xff/float(0xff), 0xff/float(0xff), 0xff/float(0xff))
-    set_source_color(context, 'tomato')
+    set_source_color(context, 'plum')
     context.fill_preserve()
 
     #context.set_source_rgb(0xff/float(0xff), 0x99/float(0xff), 0x00/float(0xff))
     #set_source_color(context, 'seagreen')
-    set_source_color(context, 'blueviolet')
+    set_source_color(context, 'mediumorchid')
     #set_source_color(context, 'c')
     context.stroke()
 
@@ -95,3 +98,7 @@ if __name__ == '__main__':
 
     surface.write_to_png(image_file)
 
+#----------------------------------------------------------------
+if __name__ == '__main__':
+    ctx = None
+    draw_label(ctx, 0, 0, '1', 'Hello')

@@ -2,12 +2,13 @@ import cairo
 import math
 import sys
 import scaled_font
+from t12 import set_source_color
 
 #----------------------------------------------------------------
-if __name__ == '__main__':
+if __name__ =='__main__':
     image_file = 'image_' + sys.argv[0].replace('.py', '.png')
     width = 400
-    height = 200
+    height = 550
     line_width = 10
     font_size = 20
 
@@ -15,9 +16,9 @@ if __name__ == '__main__':
     context = cairo.Context(surface)
 
     x = 40
-    y = 50
+    y = 30
     w = 320
-    h = 100
+    h = 500
     r = 20
 
     line_width = 20
@@ -34,9 +35,9 @@ if __name__ == '__main__':
     context.arc(x+r, y+r, r, math.pi, 1.5*math.pi)
     context.close_path()
 
-    context.set_source_rgb(0xff/float(0xff), 0xff/float(0xff), 0xff/float(0xff))
+    context.set_source_rgb(0xff/float(0xff), 0xff/float(0xff), 0x00/float(0xff))
     context.fill_preserve()
-    context.set_source_rgb(0xff/float(0xff), 0x99/float(0xff), 0x00/float(0xff))
+    context.set_source_rgb(0x00/float(0xff), 0x00/float(0xff), 0xff/float(0xff))
     context.stroke()
 
     x = 75
@@ -61,15 +62,15 @@ if __name__ == '__main__':
     context.show_text(str)
     context.stroke()
 
-    context.select_font_face('Ricty Diminished', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    context.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
     x = 115
-    y = 100
-    str = 'こんにちは'
-    font_size = 30
+    y = 113
+    str = 'こんにちは!'
+    font_size = 40
     context.set_source_rgb(0, 0, 0)
     context.set_font_size(font_size)
     context.move_to(x, y)
-    context.show_text('こんにちは')
+    context.show_text(str)
     context.stroke()
 
     surface.write_to_png(image_file)

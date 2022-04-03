@@ -82,7 +82,7 @@ if __name__ == '__main__':
     context.show_text(str)
     context.stroke()
 
-    context.select_font_face('Ricty Diminished', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    context.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
     x = 115
     y = 100
     str = 'こんにちは'

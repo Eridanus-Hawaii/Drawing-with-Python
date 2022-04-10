@@ -25,15 +25,6 @@ def draw_label(ctx, x, y, num, str):
     print(num, 'を描画')
     print(str, 'を描画')
 
-    image_file = 'image_' + sys.argv[0].replace('.py', '.png')
-    width = 400
-    height = 200
-    line_width = 10
-    font_size = 20
-
-    surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
-    context = cairo.Context(surface)
-
     x = 40
     y = 50
     w = 320
@@ -97,10 +88,18 @@ def draw_label(ctx, x, y, num, str):
     context.show_text('こんにちは')
     context.stroke()
 
-    surface.write_to_png(image_file)
-
 #----------------------------------------------------------------
 if __name__ == '__main__':
-    ctx = None
-    draw_label(ctx, 0, 0, '1', 'Hello')
+    image_file = 'image_' + sys.argv[0].replace('.py', '.png')
+    width = 400
+    height = 200
+    line_width = 10
+    font_size = 20
 
+    surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
+    context = cairo.Context(surface)
+    ctx = None
+
+    draw_label(ctx, 0, 0, '十', 'Hello')
+
+    surface.write_to_png(image_file)

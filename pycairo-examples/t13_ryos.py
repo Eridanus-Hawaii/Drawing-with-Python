@@ -18,19 +18,9 @@ def set_source_color(context, name):
                 context.set_source_rgb(new_color[0], new_color[1], new_color[2])
                 break
 
-
 #----------------------------------------------------------------
-def draw_label(ctx, my_x, my_y, my_num, my_str):
-    print(my_x, my_y, 'に移動して')
-    print(my_num, 'を描画')
-    print(my_str, 'を描画')
-
-    x = 40
-    y = 50
-    w = 320
-    h = 100
-    r = 20
-
+def draw_frame(ctx, x, y, w, h, r):
+    print("フレームを描く", x, y, w, h, r)
     line_width = 20
     ctx.set_line_width(line_width)
 
@@ -55,11 +45,13 @@ def draw_label(ctx, my_x, my_y, my_num, my_str):
     #set_source_color(ctx, 'c')
     ctx.stroke()
 
-    x = 75
-    y = 95
+#----------------------------------------------------------------
+def draw_circle_num(ctx, x, y, r, num, color):
+    print("円を描いて番号も描く", x, y, r, num)
 
-    ctx.set_source_rgb(0, 0, 0)
-    r = 20
+    #ctx.set_source_rgb(0, 0, 0)
+    ctx.set_source_rgb(color[0], color[1], color[2])
+
     line_width = 3
     ctx.set_line_width(line_width)
     ctx.arc(x, y, r, 0, math.pi * 2)
@@ -67,23 +59,42 @@ def draw_label(ctx, my_x, my_y, my_num, my_str):
 
     font_size = 30
     sf = scaled_font.get_scaled_font('Arial', font_size )
-    extents = sf.text_extents(my_num)
-    ctx.set_source_rgb(0, 0, 0)
+    extents = sf.text_extents(num)
     ctx.set_font_size(font_size)
     ctx.move_to(x, y)
     ctx.rel_move_to(-extents.width/2, -extents.height/2)
     ctx.rel_move_to(-extents.x_bearing, -extents.y_bearing)
-    ctx.show_text(my_num)
+    ctx.show_text(num)
     ctx.stroke()
+
+#----------------------------------------------------------------
+def draw_my_string(ctx, x, y, str, color):
+    print('draw_my_string', x, y, str, color)
 
     ctx.select_font_face('Ricty Diminished', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
 
     font_size = 30
-    ctx.set_source_rgb(0, 0, 0)
+    #ctx.set_source_rgb(0, 0, 0)
+    ctx.set_source_rgb(color[0], color[1], color[2])
+
     ctx.set_font_size(font_size)
-    ctx.move_to(my_x, my_y)
-    ctx.show_text(my_str)
+    ctx.move_to(x, y)
+    ctx.show_text(str)
     ctx.stroke()
+    
+#----------------------------------------------------------------
+def draw_label(ctx, my_x, my_y, my_num, my_str):
+    #print(my_x, my_y, 'に移動して')
+    #print(my_num, 'を描画')
+    #print(my_str, 'を描画')
+
+    w = 320
+    h = 150
+    r = 20
+
+    draw_frame     (ctx, my_x     , my_y     , w, h, r)
+    draw_circle_num(ctx, my_x + 30, my_y + 75, r, my_num, (0, 0, 0))
+    draw_my_string (ctx, my_x + 60, my_y + 85, my_str, (0, 0, 0))
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
@@ -96,6 +107,6 @@ if __name__ == '__main__':
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
     context = cairo.Context(surface)
 
-    draw_label(context, 115, 100, '十', 'Hello')
+    draw_label(context, 10, 10, '1', 'HelloHelloHello')
 
     surface.write_to_png(image_file)

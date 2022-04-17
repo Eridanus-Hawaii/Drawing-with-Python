@@ -114,4 +114,4 @@ if __name__ == '__main__':
     #draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
     draw_label(context, 10, 10, '1', 'Hello')
     #draw_my_string(context, 10, 30, 'Hello', (255, 255, 255))
-    surface.write_to_png(image_file4)
+    surface.write_to_png(image_file)

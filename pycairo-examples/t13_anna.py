@@ -68,6 +68,19 @@ def draw_circle_num(ctx, x, y, r, num, color):
     ctx.show_text(num)
     ctx.stroke()
 
+def draw_my_string(ctx, x, y, str, color):
+    # write any word inside the picture 
+    print('draw string inside square', x, y, str, color)
+    ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+
+    font_size = 30
+    ctx.set_source_rgb(color[0], color[1], color[2])
+    ctx.set_font_size(font_size)
+    ctx.move_to(x, y)
+    ctx.show_text(str)
+    ctx.stroke()
+
+
 def draw_label(ctx, my_x, my_y, my_num, my_str):
     print('move to', my_x, my_y)
     print('draw', my_num)
@@ -81,21 +94,11 @@ def draw_label(ctx, my_x, my_y, my_num, my_str):
     r = 20
 
 
-    ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-    print('here0', x, y, str)
-
-    font_size = 30
-    ctx.set_source_rgb(0, 0, 0)
-    ctx.set_font_size(font_size)
-    ctx.move_to(my_x, my_y)
-    ctx.show_text(my_str)
-    ctx.stroke()
-
-
 if __name__ == '__main__':
     image_file = 'image_' + sys.argv[0].replace('.py', '.png')
     image_file1 = 'image_frame_practice.png'
     image_file2 = 'image_num_practice.png'
+    image_file3 = 'image_string_practice.png'
     width = 400
     height = 200
     line_width = 10
@@ -105,7 +108,7 @@ if __name__ == '__main__':
     context = cairo.Context(surface)
 
     #draw_frame(context, 140, 50, 380, 100, 40)
-    draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
+    #draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
     #draw_label(context, 30, 100, '1', 'Hello')
-
-    surface.write_to_png(image_file2)
+    draw_my_string(context, 10, 30, 'Hello', (255, 255, 255))
+    surface.write_to_png(image_file3)

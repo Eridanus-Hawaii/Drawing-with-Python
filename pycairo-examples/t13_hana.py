@@ -18,17 +18,9 @@ def set_source_color(context, name):
                 context.set_source_rgb(new_color[0], new_color[1], new_color[2])
                 break
 
-#----------------------------------------------------------------
-def draw_label(ctx, x, y, num, str):
-    print(x, y, 'に移動して')
-    print(num, 'を描画')
-    print(str, 'を描画')
-
-    x = 40
-    y = 50
-    w = 320
-    h = 100
-    r = 20
+#----------------------------------------------------------------　
+def draw_frame(ctx, x, y, w, h, r):
+    print("フレームを描く", x, y, w, h, r)
 
     line_width = 20
     ctx.set_line_width(line_width)
@@ -53,6 +45,20 @@ def draw_label(ctx, x, y, num, str):
     set_source_color(ctx, 'mediumorchid')
     #set_source_color(ctx, 'c')
     ctx.stroke()
+#----------------------------------------------------------------　
+# ①の丸を描く
+def draw_label(ctx, my_x, my_y, my_num, my_str):
+    print(my_x, my_y, 'に移動して')
+    print(my_num, 'を描画')
+    print(my_str, 'を描画')
+
+    x = 40
+    y = 50
+    w = 320
+    h = 100
+    r = 20
+
+    draw_frame(ctx, x, y, w, h, r)
 
     x = 75
     y = 95
@@ -67,24 +73,22 @@ def draw_label(ctx, x, y, num, str):
     str = '1'
     font_size = 30
     sf = scaled_font.get_scaled_font('Arial', font_size )
-    extents = sf.text_extents(str)
+    extents = sf.text_extents(my_num)
     ctx.set_source_rgb(0, 0, 0)
     ctx.set_font_size(font_size)
     ctx.move_to(x, y)
     ctx.rel_move_to(-extents.width/2, -extents.height/2)
     ctx.rel_move_to(-extents.x_bearing, -extents.y_bearing)
-    ctx.show_text(str)
+    ctx.show_text(my_num)
     ctx.stroke()
 
     ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-    x = 115
-    y = 100
-    str = 'こんにちは'
+
     font_size = 30
     ctx.set_source_rgb(0, 0, 0)
     ctx.set_font_size(font_size)
-    ctx.move_to(x, y)
-    ctx.show_text('こんにちは')
+    ctx.move_to(my_x, my_y)
+    ctx.show_text(my_str)
     ctx.stroke()
 
 #----------------------------------------------------------------
@@ -95,9 +99,9 @@ if __name__ == '__main__':
     line_width = 10
     font_size = 20
 
-    surface = cairo.ImageSurface(cairo.FORMAT_RGB24, w  idth, height)
+    surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
     context = cairo.Context(surface)
-    ctx = None
-    draw_label(ctx, 0, 0, '1', 'Hello')
+
+    draw_label(context, 30, 110, '1', 'Hello')
 
     surface.write_to_png(image_file)

@@ -87,10 +87,13 @@ def draw_label(ctx, my_x, my_y, my_num, my_str):
     print('draw', my_str)
 
     #  all function included 
+    w = 320 
+    h = 150
+    r = 20
   
-    draw_frame(context, 140, 50, 380, 100, 40)
-    draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
-    draw_my_string(context, 10, 30, 'Hello', (255, 255, 255))
+    draw_frame(context, my_x, my_y, w, h, r)
+    draw_circle_num(context, my_x, my_y, r, my_num, (255, 255, 255))
+    draw_my_string(context, my_x, my_y, my_str, (255, 255, 255))
 
 
 if __name__ == '__main__':

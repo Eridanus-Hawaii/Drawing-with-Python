@@ -63,6 +63,18 @@ def draw_circle_num(ctx, x, y, r, num, color):
     ctx.rel_move_to(-extents.x_bearing, -extents.y_bearing)
     ctx.show_text(num)
     ctx.stroke()
+
+def draw_my_string(ctx, x, y, str, color):
+    print('draw_my_string', x, y, str, color)
+    
+    ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+
+    font_size = 30
+    ctx.set_source_rgb(color[0], color[1], color[2])
+    ctx.set_font_size(font_size)
+    ctx.move_to(x, y)
+    ctx.show_text(str)
+    ctx.stroke()
 #----------------------------------------------------------------　
 # ①の丸を描く
 def draw_label(ctx, my_x, my_y, my_num, my_str):
@@ -78,16 +90,9 @@ def draw_label(ctx, my_x, my_y, my_num, my_str):
 
     draw_frame(ctx, x, y, w, h, r)
 
-    draw_circle_num(ctx, x, y, r, num, (0, 0, 0))
+    draw_circle_num(ctx, x, y, r, my_num, (0, 0, 0))
 
-    ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-
-    font_size = 30
-    ctx.set_source_rgb(0, 0, 0)
-    ctx.set_font_size(font_size)
-    ctx.move_to(my_x, my_y)
-    ctx.show_text(my_str)
-    ctx.stroke()
+    draw_my_string(ctx, x, y, my_str, (0, 0, 0))
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
@@ -107,7 +112,8 @@ if __name__ == '__main__':
     r = 40
 
     # draw_frame(context, x, y, w, h, r)
-    # draw_label(context, 30, 110, '1', 'Hello')
-    draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
+    draw_label(context, 30, 110, '1', 'Hello')
+    # draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
+    # draw_my_string(context, 30, 30, 'hello', (255, 255, 255))
 
     surface.write_to_png(image_file)

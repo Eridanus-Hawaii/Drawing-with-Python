@@ -81,19 +81,45 @@ def draw_my_string(ctx, x, y, str, color):
     ctx.stroke()
 
 
-def draw_label(ctx, my_x, my_y, my_num, my_str):
-    print('move to', my_x, my_y)
+def draw_label(ctx, my_num, my_str, width, height):
+    """
+    Draw a label into ctx.
+    Parameters:
+    -----------
+    ctx: context
+        a context of cairo.
+    ny_num: string 
+        number goes into a first circle. 
+    my_str: string 
+        words that comes after the numbered circle
+    width: integer
+        outside frame length of side
+    height: integer
+        height of the frame
+    Returns:
+    ---------
+        None 
+    """
     print('draw', my_num)
     print('draw', my_str)
 
     #  all function included 
-    w = 320 
-    h = 150
+    line_width = 20
+    w = width - line_width / 2 - line_width / 2 
+    h = height - line_width / 2 - line_width / 2  # linewidth is for top and bottom 
     r = 20
-  
-    draw_frame(context, my_x, my_y, w, h, r)
-    draw_circle_num(context, my_x + 30, my_y + 75, r, my_num, (0, 0, 0))
-    draw_my_string(context, my_x + 60, my_y + 85, my_str, (0, 0, 0))
+
+    x = line_width / 2
+    y = line_width / 2 
+    draw_frame(context, x, y, w, h, r)
+
+    x2 = x + line_width / 2 + r + 5 # for circle 1 starting point 
+    y2 = y + h / 2
+    draw_circle_num(context, x2, y2, r, my_num, (0, 0, 0))
+
+    x3 = x2 + r + 5
+    y3 = y2 + 10 
+    draw_my_string(context, x3, y3, my_str, (0, 0, 0))
 
 
 if __name__ == '__main__':
@@ -103,7 +129,7 @@ if __name__ == '__main__':
     image_file3 = 'image_string_practice.png'
     image_file4 = 'image_complete.png'
     width = 400
-    height = 200
+    height = 100
     line_width = 10
     font_size = 20
 
@@ -112,6 +138,6 @@ if __name__ == '__main__':
 
     #draw_frame(context, 140, 50, 380, 100, 40)
     #draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
-    draw_label(context, 10, 10, '1', 'Hello')
+    draw_label(context, '1', 'Hello', width, height)
     #draw_my_string(context, 10, 30, 'Hello', (255, 255, 255))
     surface.write_to_png(image_file)

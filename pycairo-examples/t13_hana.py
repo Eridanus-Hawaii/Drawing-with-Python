@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import cairo
 import math
 import sys
@@ -20,7 +21,7 @@ def set_source_color(context, name):
 
 #----------------------------------------------------------------　
 def draw_frame(ctx, x, y, w, h, r):
-    print("フレームを描く", x, y, w, h, r)
+    # print("フレームを描く", x, y, w, h, r)
 
     line_width = 20
     ctx.set_line_width(line_width)
@@ -47,7 +48,7 @@ def draw_frame(ctx, x, y, w, h, r):
     ctx.stroke()
 
 def draw_circle_num(ctx, x, y, r, num, color):
-    print("円を描いて番号も描く", x, y, r, num, color)
+    # print("円を描いて番号も描く", x, y, r, num, color)
     ctx.set_source_rgb(color[0], color[1], color[2])
     line_width = 3
     ctx.set_line_width(line_width)
@@ -65,7 +66,7 @@ def draw_circle_num(ctx, x, y, r, num, color):
     ctx.stroke()
 
 def draw_my_string(ctx, x, y, str, color):
-    print('draw_my_string', x, y, str, color)
+    # print('draw_my_string', x, y, str, color)
     
     ctx.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
 
@@ -76,29 +77,63 @@ def draw_my_string(ctx, x, y, str, color):
     ctx.show_text(str)
     ctx.stroke()
 #----------------------------------------------------------------　
-# ①の丸を描く
-def draw_label(ctx, my_x, my_y, my_num, my_str):
-    print(my_x, my_y, 'に移動して')
-    print(my_num, 'を描画')
-    print(my_str, 'を描画')
+def draw_label(ctx, my_num, my_str, width, height):
+    """
+    Draw a label into ctx.
+    フレームを作って、my_num で示された文字列を丸囲むしたうえで描画して、続けてmy_str をラベルをコンテキストに書く
 
-    x = 40
-    y = 50
-    w = 320
-    h = 100
+    Parameters:
+    ---------
+    ctx: context
+        a context of cairo.
+        回路のコンテキスト
+
+    my_num: string
+        丸囲みの数字。先頭に描画される。ex.)①
+    
+    my_str: string
+        文字列。mu_num に続けて描画される。ex.)①Hello
+
+    width: int
+        横幅
+    
+    height: int
+        高さ
+
+    Returns:
+    ---------
+    なし
+
+    """
+
+    line_width = 20
+
+    w = width - line_width/2 - line_width/2
+    h = height  - line_width/2 - line_width/2
     r = 20
 
-    draw_frame(ctx, x, y, w, h, r)
+    x = line_width/2
+    y = line_width/2 
 
-    draw_circle_num(ctx, x, y, r, my_num, (0, 0, 0))
+    draw_frame     (ctx, x  , y  , w, h, r)
 
-    draw_my_string(ctx, x, y, my_str, (0, 0, 0))
+    x2 = x + line_width/2 + r + 5
+    y2 = x + h/2
+
+    draw_circle_num(ctx, x2 , y2 , r, my_num, (0, 0, 0))
+
+    font_h = 10
+    x3 = x2 +r +5
+    y3 = y2 + font_h
+
+    draw_my_string (ctx, x3 , y3 , my_str, (0, 0, 0))
 
 #----------------------------------------------------------------
+
 if __name__ == '__main__':
     image_file = 'image_' + sys.argv[0].replace('.py', '.png')
     width = 400
-    height = 200
+    height = 100
     line_width = 10
     font_size = 20
 
@@ -112,7 +147,7 @@ if __name__ == '__main__':
     r = 40
 
     # draw_frame(context, x, y, w, h, r)
-    draw_label(context, 30, 110, '1', 'Hello')
+    draw_label(context, '1', 'Hello MOCHAN', width, height)
     # draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
     # draw_my_string(context, 30, 30, 'hello', (255, 255, 255))
 

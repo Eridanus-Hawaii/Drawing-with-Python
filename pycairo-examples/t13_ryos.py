@@ -83,22 +83,66 @@ def draw_my_string(ctx, x, y, str, color):
     ctx.stroke()
     
 #----------------------------------------------------------------
-def draw_label(ctx, my_x, my_y, my_num, my_str):
-    #print(my_x, my_y, 'に移動して')
+def draw_label(ctx, my_num, my_str, width, height):
+    """
+    Draw a label into ctx.
+    フレームを作って、my_num で示された文字列を
+    丸囲みしたうえで描画して、続けて
+    my_strをラベルとしてコンテキストに描画する。
+
+    Parameters:
+    ---------
+    ctx: context
+        a context of cairo.
+        カイロのコンテキスト
+
+    my_num: string
+        描くべき丸囲みの数字。先頭に描画される。
+
+    my_str: string
+        描くべき文字列。my_num に続けて描画される。
+
+    width: int
+        横幅
+
+    height: int
+        高さ
+
+    Returns:
+    ---------
+    なし
+
+    """
+
     #print(my_num, 'を描画')
     #print(my_str, 'を描画')
 
-    w = 320
-    h = 150
+    line_width = 20
+
+    w = width - line_width/2 - line_width/2
+    h = height - line_width/2 - line_width/2 
     r = 20
 
-    draw_frame     (ctx, my_x     , my_y     , w, h, r)
-    draw_circle_num(ctx, my_x + 30, my_y + 75, r, my_num, (0, 0, 0))
-    draw_my_string (ctx, my_x + 60, my_y + 85, my_str, (0, 0, 0))
+    x = line_width/2
+    y = line_width/2
+
+    draw_frame     (ctx, x     , y      , w, h, r)
+
+    x2 = x + line_width/2 + r + 5
+    y2 = y + h/2
+
+    draw_circle_num(ctx, x2    , y2     , r, my_num, (0, 0, 0))
+
+    font_h = 10
+    x3 = x2 + r + 10
+    y3 = y2 + font_h
+
+    draw_my_string (ctx, x3    , y3     , my_str, (0, 0, 0))
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
     image_file = 'image_' + sys.argv[0].replace('.py', '.png')
+
     width = 400
     height = 200
     line_width = 10
@@ -107,6 +151,6 @@ if __name__ == '__main__':
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
     context = cairo.Context(surface)
 
-    draw_label(context, 10, 10, '1', 'HelloHelloHello')
+    draw_label(context, '1', 'Hello', width, height)
 
     surface.write_to_png(image_file)

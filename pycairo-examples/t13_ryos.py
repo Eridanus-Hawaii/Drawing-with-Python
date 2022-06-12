@@ -126,18 +126,18 @@ def draw_label(ctx, my_num, my_str, width, height):
     x = line_width/2
     y = line_width/2
 
-    draw_frame     (ctx, x     , y      , w, h, r)
+    draw_frame(ctx, x, y, w, h, r)
 
     x2 = x + line_width/2 + r + 5
     y2 = y + h/2
 
-    draw_circle_num(ctx, x2    , y2     , r, my_num, (0, 0, 0))
+    draw_circle_num(ctx, x2, y2, r, my_num, (0, 0, 0))
 
     font_h = 10
     x3 = x2 + r + 10
     y3 = y2 + font_h
 
-    draw_my_string (ctx, x3    , y3     , my_str, (0, 0, 0))
+    draw_my_string (ctx, x3, y3, my_str, (0, 0, 0))
 
 #----------------------------------------------------------------
 if __name__ == '__main__':

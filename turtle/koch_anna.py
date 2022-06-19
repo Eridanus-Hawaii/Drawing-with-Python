@@ -41,7 +41,7 @@ def fact0(n):
     # N! = N * (N-1)!
 
     if n == 1:
-        return 1
+        return 1 # this is the first practice
     return n * fact0(n-1)
 print(fact0(5))
 print(fact0(40))

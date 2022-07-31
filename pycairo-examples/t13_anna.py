@@ -111,15 +111,15 @@ def draw_label(ctx, my_num, my_str, width, height):
 
     x = line_width / 2
     y = line_width / 2 
-    draw_frame(context, x, y, w, h, r)
+    draw_frame(ctx, x, y, w, h, r)
 
     x2 = x + line_width / 2 + r + 5 # for circle 1 starting point 
     y2 = y + h / 2
-    draw_circle_num(context, x2, y2, r, my_num, (0, 0, 0))
+    draw_circle_num(ctx, x2, y2, r, my_num, (0, 0, 0))
 
     x3 = x2 + r + 5
     y3 = y2 + 10 
-    draw_my_string(context, x3, y3, my_str, (0, 0, 0))
+    draw_my_string(ctx, x3, y3, my_str, (0, 0, 0))
 
 
 if __name__ == '__main__':
@@ -134,10 +134,10 @@ if __name__ == '__main__':
     font_size = 20
 
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
-    context = cairo.Context(surface)
+    ex_context = cairo.Context(surface)
 
-    #draw_frame(context, 140, 50, 380, 100, 40)
-    #draw_circle_num(context, 10, 10, 20, '1', (255, 255, 255))
-    draw_label(context, '1', 'Hello', width, height)
-    #draw_my_string(context, 10, 30, 'Hello', (255, 255, 255))
+    #draw_frame(ex_context, 140, 50, 380, 100, 40)
+    #draw_circle_num(ex_context, 10, 10, 20, '1', (255, 255, 255))
+    draw_label(ex_context, '1', 'Aloha', width, height)
+    #draw_my_string(ex_context, 10, 30, 'Hello', (255, 255, 255))
     surface.write_to_png(image_file)

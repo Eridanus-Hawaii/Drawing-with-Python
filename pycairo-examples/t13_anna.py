@@ -134,10 +134,10 @@ if __name__ == '__main__':
     font_size = 20
 
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, width, height)
-    anna_context = cairo.Context(surface)
+    ex_context = cairo.Context(surface)
 
-    #draw_frame(anna_context, 140, 50, 380, 100, 40)
-    #draw_circle_num(anna_context, 10, 10, 20, '1', (255, 255, 255))
-    draw_label(anna_context, '1', 'Hello', width, height)
-    #draw_my_string(anna_context, 10, 30, 'Hello', (255, 255, 255))
+    #draw_frame(ex_context, 140, 50, 380, 100, 40)
+    #draw_circle_num(ex_context, 10, 10, 20, '1', (255, 255, 255))
+    draw_label(ex_context, '1', 'Aloha', width, height)
+    #draw_my_string(ex_context, 10, 30, 'Hello', (255, 255, 255))
     surface.write_to_png(image_file)

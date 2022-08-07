@@ -3,16 +3,34 @@ import math
 import sys
 import scaled_font
 
-class Drawing: 
-    def __init__(self, name, color, width, height):
-        # print('initializing:', width, height)
+class Label: 
+    def __init__(self, name):
+        print('initializing:')
         self.name = name
-        self.color = color
-        self.width = width
-        self.height = height
+
+        self.color = 'Blue'
+
+        self.width = None
+        self.height = None
+
+        self.surface = None
+        self.cotext = None
+    
+    def init_surface(self):
+        print('Creating initial surface')
+        self.width = 400
+        self.height = 100
+        self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
+
+       
+    def init_context(self):
+        print('Setting up context')
+        self.context = cairo.Context(self.surface)
+        print('creating context')
+ 
 
     def draw_frame(self):
-        print(f'Draw frames{self.color} {self.width} {self.height}')
+        print(f'Draw frames  {self.color} {self.width} {self.height}')
 
     def draw_circle_num(self):
         print(f'Draw circle {self.width} {self.height}')
@@ -25,16 +43,28 @@ class Drawing:
         self.draw_circle_num()
         self.draw_my_string ()
 
+    def save_image(self, filename):
+        print('Saving image to local PC:', filename)
+
     def __str__(self):
         return f'Drawing Object {self.name} {self.color} {self.width} {self.height}'
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
-    dobj_hana = Drawing('hana', 'Blue', 640, 480)
+    mochan = Label('Aloha Mochan')
 
-    print(dobj_hana)
-    dobj_hana.draw_label()
+    mochan.init_surface() # not yet 
+    mochan.init_context() # not yet
+    mochan.draw_label()
+    mochan.save_image('mochan.png')
 
-    dobj_anna = Drawing('anna', 'Red', 320, 240)
-    print(dobj_anna)
-    dobj_anna.draw_label()
+
+
+    #dobj_hana = Label('hana', 'Blue', 640, 480)
+
+    #print(dobj_hana)
+    #dobj_hana.draw_label()
+
+    #dobj_anna = Label('anna', 'Red', 320, 240)
+    #print(dobj_anna)
+    #dobj_anna.draw_label()

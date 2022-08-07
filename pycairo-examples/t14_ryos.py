@@ -3,13 +3,28 @@ import math
 import sys
 import scaled_font
 
-class Drawing: 
-    def __init__(self, name, color, width, height):
-        # print('初期化してるよ', width, height)
+class Label: 
+    def __init__(self, name):
         self.name = name
-        self.color = color
-        self.width = width
-        self.height = height
+
+        self.color = 'Blue'
+
+        self.width = None
+        self.height = None
+
+        self.surface = None
+        self.context = None
+
+    def init_surface(self):
+        self.width = 400
+        self.height = 100
+
+        self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
+        print('init_surface しました', self.surface)
+        
+    def init_context(self):
+        self.context = cairo.Context(self.surface)
+        print('init_context しました')
 
     def draw_frame(self):
         print(f'  フレームを {self.color} で書く {self.width} {self.height}')
@@ -30,11 +45,7 @@ class Drawing:
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
-    dobj_hana = Drawing('hana', 'Blue', 640, 480)
+    mochan = Label('Aloha Mochan')
 
-    print(dobj_hana)
-    dobj_hana.draw_label()
-
-    dobj_anna = Drawing('anna', 'Red', 320, 240)
-    print(dobj_anna)
-    dobj_anna.draw_label()
+    mochan.init_surface()
+    mochan.init_context()

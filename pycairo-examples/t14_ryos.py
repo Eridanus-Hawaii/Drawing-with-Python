@@ -26,6 +26,9 @@ class Label:
         self.context = cairo.Context(self.surface)
         print('init_context しました')
 
+    def save_image(self, filename):
+        print(f'{filename} にセーブします')
+
     def draw_frame(self):
         print(f'  フレームを {self.color} で書く {self.width} {self.height}')
 
@@ -36,6 +39,8 @@ class Label:
         print(f'  文字を書く {self.width} {self.height}')
 
     def draw_label(self):
+        print(f'ラベルを作ります')
+
         self.draw_frame()
         self.draw_circle_num()
         self.draw_my_string ()
@@ -49,3 +54,6 @@ if __name__ == '__main__':
 
     mochan.init_surface()
     mochan.init_context()
+
+    mochan.draw_label()
+    mochan.save_image('mochan.png')

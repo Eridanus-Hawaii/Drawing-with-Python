@@ -3,13 +3,22 @@ import math
 import sys
 import scaled_font
 
-class Drawing:
-    def __init__(self, name, color, width, height):
-        print('初期化してるよ', width, height)
+class Label:
+    def __init__(self, name):
+        print('初期化してるよ')
         self.name = name
-        self.color = color
-        self.width = width
-        self.height = height
+        self.color = 'blue'
+        self.width = 400
+        self.height = 100
+    
+    def init_surface(self):
+        print('サーフェス作ったよ')
+
+    def init_context(self):
+        print('コンテキスト作ったよ')
+
+    def save_image(self, filename):
+        print('ファイルネームにセーブするよ', filename)
 
     def __str__(self):
         return f'Drawing Object {self.name} {self.color} {self.width} {self.height}'
@@ -28,11 +37,12 @@ class Drawing:
         self.draw_circle_num()
         self.draw_my_string ()
 
+#----------------------------------------------------------------
 if __name__ == '__main__':
-    dobj = Drawing('hana', 'Purple', 640, 480)
-    print(dobj)
-    dobj.draw_label()
+    mochan = Label('Aloha Mochan')
 
-    dobj1 = Drawing('anna', 'Blue', 87, 30)
-    print(dobj1)
-    dobj1.draw_label()
+    mochan.init_surface()
+    mochan.init_context()
+
+    mochan.draw_label()
+    mochan.save_image('mochan2.png')

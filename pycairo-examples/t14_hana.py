@@ -10,12 +10,20 @@ class Label:
         self.color = 'blue'
         self.width = 400
         self.height = 100
+
+        self.surface = None
+        self.context = None
     
     def init_surface(self):
-        print('サーフェス作ったよ')
+        print('Creating initial surface')
+        self.width = 400
+        self.height = 100
+        self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
 
     def init_context(self):
-        print('コンテキスト作ったよ')
+        print('Setting up context')
+        self.context = cairo.Context(self.surface)
+        print('creating context')
 
     def save_image(self, filename):
         print('ファイルネームにセーブするよ', filename)

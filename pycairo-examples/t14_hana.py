@@ -8,8 +8,10 @@ class Label:
     def __init__(self, name):
         print('初期化してるよ')
         self.name = name
+
         self.color = 'blue'
         self.line_width = 20
+
         self.width = 400
         self.height = 100
 
@@ -50,6 +52,11 @@ class Label:
     def draw_frame(self):
         self.set_source_color(self.color)
         self.context.set_line_width(self.line_width)
+
+        self.context.move_to(0, 0)
+        self.context.line_to(100, 100)
+
+        self.context.stroke()
 
         print(f'Draw frames{self.color} {self.width} {self.height}')
 

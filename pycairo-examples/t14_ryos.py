@@ -23,7 +23,11 @@ class Label:
         self.my_num = my_num
         self.name = name
 
-        self.color = 'Blue'
+        self.fill_color = 'blue'
+        self.line_color = 'tomato'
+        self.circle_color = 'yellow'
+
+        self.line_width = 20
 
         self.width = None
         self.height = None
@@ -32,7 +36,7 @@ class Label:
         self.context = None
 
     def init_surface(self):
-        self.width = 400
+        self.width = 25 + len(self.name) * 20 + 25
         self.height = 100
 
         self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
@@ -46,11 +50,23 @@ class Label:
         print(f'{filename} にセーブします')
         self.surface.write_to_png(filename)
 
+    def set_source_color(self, name):
+        for colors in [mcolors.BASE_COLORS, mcolors.TABLEAU_COLORS, mcolors.CSS4_COLORS]:
+            for color_name, color in colors.items():
+                if name == color_name:
+                    #print('icchi', color)
+                    # #2E8B57
+                    if type(color) == tuple:
+                        new_color = color
+                    else:
+                        new_color = (int(color[1:3], 16)/255, int(color[3:5], 16)/255, int(color[5:7], 16)/255)
+                    self.context.set_source_rgb(new_color[0], new_color[1], new_color[2])
+                    break
     #----------------------------------------------------------------
     def draw_frame(self, x, y, w, h, r):
-        print(f'  フレームを {self.color} で書く {self.width} {self.height}')
-        line_width = 20
-        self.context.set_line_width(line_width)
+        print(f'  フレームを {self.fill_color} で書く {self.width} {self.height}')
+        self.set_source_color(self.fill_color)
+        self.context.set_line_width(self.line_width)
 
         self.context.move_to(x+r, y)
         self.context.line_to(x+w-r-1, y)
@@ -63,20 +79,16 @@ class Label:
         self.context.arc(x+r, y+r, r, math.pi, 1.5*math.pi)
         self.context.close_path()
 
-        #self.context.set_source_rgb(0xff/float(0xff), 0xff/float(0xff), 0xff/float(0xff))
-        set_source_color(self.context, 'tomato')
         self.context.fill_preserve()
 
-        #self.context.set_source_rgb(0xff/float(0xff), 0x99/float(0xff), 0x00/float(0xff))
-        #set_source_color(self.context, 'seagreen')
-        set_source_color(self.context, 'blueviolet')
-        #set_source_color(self.context, 'c')
+        self.set_source_color(self.line_color)
         self.context.stroke()
 
-    def draw_circle_num(self, x, y, r, color):
+
+    def draw_circle_num(self, x, y, r):
         print(f'  まるをかく {self.width} {self.height}')
         #self.context.set_source_rgb(0, 0, 0)
-        self.context.set_source_rgb(color[0], color[1], color[2])
+        self.set_source_color(self.circle_color)
 
         line_width = 3
         self.context.set_line_width(line_width)
@@ -137,10 +149,13 @@ class Label:
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
-    mochan = Label('1', 'Aloha Mochan')
+    mochan = Label('1', 'Aloha Mochan Mochan')
 
     mochan.init_surface()
     mochan.init_context()
 
-    mochan.draw_label()
+    # mochan.draw_label()
+    mochan.draw_frame(10, 10, 380, 80, 20)
+    mochan.draw_circle_num(45, 50, 20)
+
     mochan.save_image('mochan.png')

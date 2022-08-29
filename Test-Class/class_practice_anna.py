@@ -1,7 +1,7 @@
 # practice of anna 
 class TestClass:
     def __init__(self, name, age):
-        # __init__ is the rule first creator made so every time we have to foloow
+        # __init__ is the rule first creator made so every time we have to follow
         self.name = name
         self.age = age
         self.last_food = 'Nothing'

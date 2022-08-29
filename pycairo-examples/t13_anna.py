@@ -40,9 +40,7 @@ def draw_frame(ctx, x, y, w, h, r):
     ctx.fill_preserve()
 
     #ctx.set_source_rgb(0xff/float(0xff), 0x99/float(0xff), 0x00/float(0xff))
-    #set_source_color(ctx, 'seagreen')
     set_source_color(ctx, 'blueviolet')
-    #set_source_color(ctx, 'c')
     ctx.stroke()
 
 def draw_circle_num(ctx, x, y, r, num, color):

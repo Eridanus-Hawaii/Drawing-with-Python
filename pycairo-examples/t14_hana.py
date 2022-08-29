@@ -5,12 +5,15 @@ import scaled_font
 import matplotlib.colors as mcolors
 
 class Label:
-    def __init__(self, name):
-        print('初期化してるよ')
+    def __init__(self, my_num, name):
+        self.my_num = my_num
         self.name = name
 
-        self.color = 'blue'
-        self.line_width = 20
+        self.fill_color = 'blue'
+        self.line_color = 'tomato'
+        self.circle_color = 'yellow'
+
+        self.line_width = 10
 
         self.width = 400
         self.height = 100
@@ -49,19 +52,45 @@ class Label:
                     self.context.set_source_rgb(new_color[0], new_color[1], new_color[2])
                     break
 
-    def draw_frame(self):
-        self.set_source_color(self.color)
+    def draw_frame(self, x, y, w, h, r):
+        print(f'Draw frames{self.fill_color} {self.width} {self.height}')
+
+        self.set_source_color(self.fill_color)
         self.context.set_line_width(self.line_width)
 
-        self.context.move_to(0, 0)
-        self.context.line_to(100, 100)
+        self.context.move_to(x+r, y)
+        self.context.line_to(x+w-r-1, y)
+        self.context.arc(x+w-r-1, y+r, r, -0.5*math.pi, 0)
+        self.context.line_to(x+w-1, y+h-r-1)
+        self.context.arc(x+w-r-1, y+h-r-1, r, 0, 0.5*math.pi)
+        self.context.line_to(x+r, y+h-1)
+        self.context.arc(x+r, y+h-r-1, r, 0.5*math.pi, math.pi)
+        self.context.line_to(x, y+r)
+        self.context.arc(x+r, y+r, r, math.pi, 1.5*math.pi)
+        self.context.close_path()
 
+        self.context.fill_preserve()        #ベースとなる色
+        self.set_source_color(self.line_color)
+        self.context.stroke()       #周りを囲う線
+
+    def draw_circle_num(self, x, y, r):
+    # print("円を描いて番号も描く", x, y, r, num, color)
+        print(f'Draw circle {self.width} {self.height}')
+        self.set_source_color(self.circle_color)
+        line_width = 3
+        self.context.set_line_width(line_width)
+        self.context.arc(x, y, r, 0, math.pi * 2)
         self.context.stroke()
 
-        print(f'Draw frames{self.color} {self.width} {self.height}')
-
-    def draw_circle_num(self):
-        print(f'Draw circle {self.width} {self.height}')
+        font_size = 30
+        sf = scaled_font.get_scaled_font('Arial', font_size )
+        extents = sf.text_extents(self.my_num)
+        self.context.set_font_size(font_size)
+        self.context.move_to(x, y)
+        self.context.rel_move_to(-extents.width/2, -extents.height/2)
+        self.context.rel_move_to(-extents.x_bearing, -extents.y_bearing)
+        self.context.show_text(self.my_num)
+        self.context.stroke()
 
     def draw_my_string(self):
         print(f'Write word{self.width} {self.height}')
@@ -73,10 +102,12 @@ class Label:
 
 #----------------------------------------------------------------
 if __name__ == '__main__':
-    mochan = Label('Aloha Mochan')
+    mochan = Label('1', 'Aloha Mochan')
 
     mochan.init_surface()
     mochan.init_context()
 
-    mochan.draw_label()
+    # mochan.draw_label()
+    mochan.draw_frame(10, 10, 380, 80, 20)
+    mochan.draw_circle_num(45, 50, 20)
     mochan.save_image('MOCHAN.png')

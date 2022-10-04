@@ -13,10 +13,13 @@ class Label:
         self.fill_color = 'blue'
         self.line_color = 'tomato'
         self.circle_color = 'yellow'
-        self.line_width = 10
+        self.string_color = 'cyan'
 
-        self.width = None
-        self.height = None
+        self.line_width = 10
+        self.font_size = 30
+
+        self.width = 400
+        self.height = 100
 
         self.surface = None
         self.cotext = None
@@ -98,8 +101,16 @@ class Label:
         self.context.stroke()
 
 
-    def draw_my_string(self):
-        print(f'Write word{self.width} {self.height}')
+    def draw_my_string(self, x, y):
+       # print(f'Write word{self.width} {self.height}')
+        self.context.select_font_face('Hiragino Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+
+        #self.context.set_source_rgb(color[0], color[1], color[2])
+        self.set_source_color(self.string_color)
+        self.context.set_font_size(self.font_size)
+        self.context.move_to(x, y)
+        self.context.show_text(self.name)
+        self.context.stroke()
 
     def draw_label(self):
         self.draw_frame()
@@ -123,8 +134,5 @@ if __name__ == '__main__':
     #mochan.draw_label()
     mochan.draw_frame(10, 10, 380, 80, 20)
     mochan.draw_circle_num(45, 50, 20)
+    mochan.draw_my_string(75, 65)
     mochan.save_image('t14_anna.png')
-
-
-
-

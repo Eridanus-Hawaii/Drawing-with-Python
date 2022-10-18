@@ -127,8 +127,9 @@ if __name__ == '__main__':
     mochan.init_surface()
     mochan.init_context()
 
+    my_color= input('Please input your color: ')
     # mochan.set_background_color('limegreen')
-    mochan.set_foreground_color('limegreen')
+    mochan.set_foreground_color(my_color)
     mochan.draw_label(10, 10, 380, 90)
 
     # mochan.draw_frame(10, 10, 380, 80, 20)

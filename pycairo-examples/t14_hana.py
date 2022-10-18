@@ -19,7 +19,7 @@ class Label:
         self.line_width = 10
 
         self.width = 400
-        self.height = 400
+        self.height = 100
 
         self.frame_r = 20
         self.circle_r = 20
@@ -30,8 +30,14 @@ class Label:
     def init_surface(self):
         print('Creating initial surface')
         self.width = 400
-        self.height = 400
+        self.height = 100
         self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
+
+    def set_background_color(self, a_color):
+        self.fill_color = a_color
+
+    def set_foreground_color(self, a_color):
+        self.string_color = a_color
 
     def init_context(self):
         print('Setting up context')
@@ -110,12 +116,8 @@ class Label:
         self.context.stroke()
 
     def draw_label(self, x, y, w, h):
-        frame_r = 20
         self.draw_frame(x, y, w, h, self.frame_r)
-
-        circle_r = 20
         self.draw_circle_num(x +35, y +h/2, self.circle_r)
-
         self.draw_my_string(x +65, y +h/2)
 
 #----------------------------------------------------------------
@@ -125,7 +127,10 @@ if __name__ == '__main__':
     mochan.init_surface()
     mochan.init_context()
 
-    mochan.draw_label(10, 10, 380, 180)
+    # mochan.set_background_color('limegreen')
+    mochan.set_foreground_color('limegreen')
+    mochan.draw_label(10, 10, 380, 90)
+
     # mochan.draw_frame(10, 10, 380, 80, 20)
     # mochan.draw_circle_num(45, 50, 20)
     # mochan.draw_my_string(75, 60)
